@@ -15,4 +15,4 @@ Project Structure
 *The pretrained.py file has the model for spotting the Urdu Keywords already trained incase you need to use it*
 
 
-![image](https://github.com/zartaj-asim/Urdu-KeyWord-Spotting-API/assets/109308812/30bfc83a-1ddd-43eb-8d44-5e8010c939d3)
+![Screenshot (176)](https://github.com/zartaj-asim/Urdu-KeyWord-Spotting-API/assets/109308812/d053b5fb-871a-4e74-a39a-5d4f317bb237)
