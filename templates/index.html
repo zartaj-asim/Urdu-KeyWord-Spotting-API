@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Urdu Keyword Spotting App</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add Font Awesome icons CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2&family=Edu+VIC+WA+NT+Beginner:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Existing CSS styles */
+        body {
+            font-family: 'Baloo Da 2',
+            font-family: 'Edu VIC WA NT Beginner', 
+            margin: 20px;
+            background-repeat: repeat;
+
+            background-image: url('static/img/99.gif'); /* Add the correct path to your image here */
+
+        }
+
+        form {
+            text-align: center;
+            margin: 20px;
+            border: 2px solid #22223b;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: rgba(242, 233, 228, 0.8); /* Adjust the alpha value (0.8) to make it lighter or darker */
+        }
+
+        
+
+        label {
+            
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #22223b;
+        }
+
+        input[type="file"] {
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            background-color: #22223b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #9a8c98;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #22223b;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #9a8c98;
+        }
+
+        /* Custom CSS for audio players */
+        audio {
+            width: 100%;
+            margin-top: 10px;
+            background-color: #22223b;
+            border-radius: 5px;
+        }
+
+        /* Style the audio controls */
+        audio::-webkit-media-controls-panel {
+            background-color: rgb(233, 228, 226);
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Remove default audio controls styling */
+        audio::-webkit-media-controls {
+            display: none;
+        }
+
+        /* Style the play/pause button */
+        audio::-webkit-media-controls-play-button {
+            width: 30px;
+            height: 30px;
+            background-color: #c6c6cf;
+            border-radius: 50%;
+        }
+
+        /* Style the timeline slider */
+        audio::-webkit-media-controls-timeline {
+            height: 5px;
+            background-color: #4e4ed8;
+        }
+
+        /* Style the timeline progress */
+        audio::-webkit-media-controls-current-time-display,
+        audio::-webkit-media-controls-time-remaining-display {
+            font-size: 12px;
+            color: #22223b;
+        }
+
+        /* Custom CSS for start and end indexes */
+        .result-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+        
+        }
+
+        .result-item {
+            flex: 0 0 calc(25% - 20px);
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: rgba(242, 233, 228, 0.8); /* Adjust the alpha value (0.8) to make it lighter or darker */
+            border: 2px solid #22223b;
+
+        }
+
+        /* Custom CSS for audio players */
+        .audio-player {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: rgba(242, 233, 228, 0.8); /* Adjust the alpha value (0.8) to make it lighter or darker */
+            border: 2px solid #22223b; /* Change the border color here */
+        }
+
+        .audio-player h2 {
+            margin-top: 20px;
+        }
+
+      
+
+        /* Custom CSS for the top navbar */
+        .navbar {
+         background-color: #22223b !important;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-family: 'Baloo Da 2', cursive;
+            font-family: 'Edu VIC WA NT Beginner', cursive;
+            color: #ffc300 !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            max-height: 40px;
+            margin-right: 8px;
+        }
+
+        .navbar-nav .nav-link {
+            
+            color: #ffc300 !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #9d8189 !important;
+        }
+
+
+        /* Custom CSS for rotating images */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .pic1 {
+            width: 200px;
+            height: 100px;
+            margin: 0 10px;
+            animation: rotateAndMoveUp1 6s linear infinite;
+        }
+
+        .pic2 {
+            width: 200px;
+            height: 100px;
+            margin: 0 10px;
+            animation: rotateAndMoveDown 6s linear infinite;
+        }
+
+        .pic3 {
+            width: 200px;
+            height: 100px;
+            margin: 0 10px;
+            animation: rotateAndMoveUp2 6s linear infinite;
+        }
+        .pic4 {
+            width: 200px;
+            height: 100px;
+            margin: 0 10px;
+            animation: rotateAndMoveUp1 6s linear infinite;
+        }
+
+        .pic5 {
+            width: 200px;
+            height: 100px;
+            margin: 0 10px;
+            animation: rotateAndMoveDown 6s linear infinite;
+        }
+
+        .pic6 {
+            width: 200px;
+            height: 100px;
+            margin: 0 10px;
+            animation: rotateAndMoveUp2 6s linear infinite;
+        }
+        .pic7 {
+            width: 200px;
+            height: 100px;
+            margin: 0 10px;
+            animation: rotateAndMoveUp1 6s linear infinite;
+        }
+
+        .pic8 {
+            width: 200px;
+            height: 100px;
+            margin: 0 10px;
+            animation: rotateAndMoveDown 6s linear infinite;
+        }
+
+        .pic9 {
+            width: 200px;
+            height: 100px;
+            margin: 0 10px;
+            animation: rotateAndMoveUp2 6s linear infinite;
+        }
+
+        @keyframes rotateAndMoveUp1 {
+            0% { transform: rotate(0deg) translateY(0); }
+            100% { transform: rotate(360deg) translateY(-100px); }
+        }
+
+        @keyframes rotateAndMoveUp2 {
+            0% { transform: rotate(0deg) translateY(0); }
+            100% { transform: rotate(360deg) translateY(-200px); }
+        }
+
+        @keyframes rotateAndMoveDown {
+            0% { transform: rotate(0deg) translateY(0); }
+            100% { transform: rotate(360deg) translateY(100px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bootstrap Horizontal Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <!-- Add the logo and app name to the top navbar -->
+            <a class="navbar-brand" href="#">
+                <img src="static\img\4.gif" alt="Logo">Urdu Keyword Spotting App
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- The rest of the content -->
+        <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <label for="needle">Upload Needle Audio File:</label>
+            <input type="file" id="needle" name="needle" accept=".wav"><br>
+            <label for="haystack">Upload Haystack Audio File:</label>
+            <input type="file" id="haystack" name="haystack" accept=".wav"><br>
+            <input type="submit" value="Submit">
+        </form>
+
+       <!-- Wrap the entire audio player container in a div for centering -->
+<div class="d-flex justify-content-center align-items-center">
+    <div class="col-md-6 audio-player-container">
+
+        <!-- Display the haystack audio player if the haystack_url is available -->
+        {% if haystack_url %}
+        <div class="col-md-12 audio-player">
+            <div class="text-center">
+                <h3 class="mt-3">Haystack Audio Player</h3>
+            </div>
+            <audio controls>
+                <source src="{{ haystack_url }}" type="audio/wav">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        {% endif %}
+
+        <!-- Display the needle audio player if the needle_url is available -->
+        {% if needle_url %}
+        <div class="col-md-12 audio-player">
+            <div class="text-center">
+                <h3 class="mt-3">Needle Audio Player</h3>
+            </div>
+            <audio controls>
+                <source src="{{ needle_url }}" type="audio/wav">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+        <!-- Display the results if they are available -->
+        {% if total_windows %}
+        <div class="result-container">
+           
+            <div class="row">
+                {% for start, end in needle_occurrences %}
+                <div class="col-md-3 result-item">
+                    <p>Start Index: {{ start }}</p>
+                    <p>End Index: {{ end }}</p>
+                    <button onclick="playAudio({{ start }}, {{ end }})">Play</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <div class="image-container">
+        <img src="static\img\2.gif" alt="Image 1" class="rotating-image pic1">
+        <img src="static\img\1.gif" alt="Image 2" class="rotating-image pic2">
+         <img src="static\img\1.gif" alt="Image 3" class="rotating-image pic3">
+        <img src="static\img\1.gif" alt="Image 3" class="rotating-image pic4">
+        <img src="static\img\1.gif" alt="Image 3" class="rotating-image pic5">
+        <img src="static\img\1.gif" alt="Image 3" class="rotating-image pic6">
+        <img src="static\img\1.gif" alt="Image 3" class="rotating-image pic7">
+        <img src="static\img\2.gif" alt="Image 3" class="rotating-image pic9">
+    </div>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function validateForm() {
+            var needleFile = document.getElementById("needle").value;
+            var haystackFile = document.getElementById("haystack").value;
+
+            if (needleFile == "" || haystackFile == "") {
+                alert("Please select both Needle and Haystack audio files.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function playAudio(start, end) {
+            var audioElement = new Audio("{{ haystack_url }}#t=" + start*0.01 + "," + end*0.01);
+            audioElement.play();
+        }
+    </script>
+</body>
+</html>
