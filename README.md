@@ -10,3 +10,6 @@ Project Structure
     static:
         css/style.css: Cascading style sheets for styling the user interface.
         images/: Folder containing images used within the interface.
+
+        
+*The pretrained.py file has the model for spotting the Urdu Keywords already trained incase you need to use it*
