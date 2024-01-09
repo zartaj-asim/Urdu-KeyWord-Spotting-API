@@ -9,6 +9,9 @@ Project Structure
     templates/index.html: The HTML template for the interactive web interface.
     static: 
         img/: Folder containing images used within the interface.
+    Audio: Contains sample audios that you can use as needle and hastack
+    needle -> keyword to search
+    Haystack -> audio file to search needle in.
 
         
 *The pretrained.py file has the model for spotting the Urdu Keywords already trained incase you need to use it*
