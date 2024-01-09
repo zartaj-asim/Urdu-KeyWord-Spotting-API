@@ -7,9 +7,8 @@ Project Structure
 
     app.py: The Flask application that serves as the backend for the Urdu Keyword Spotting API.
     templates/index.html: The HTML template for the interactive web interface.
-    static:
-        css/style.css: Cascading style sheets for styling the user interface.
-        images/: Folder containing images used within the interface.
+    static: 
+        img/: Folder containing images used within the interface.
 
         
 *The pretrained.py file has the model for spotting the Urdu Keywords already trained incase you need to use it*
